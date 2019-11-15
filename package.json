@@ -1,9 +1,12 @@
 {
   "name": "@dmstr/cookie-consent",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Library to address GDPR (The General Data Protection Regulation)",
   "main": "dist/cookie-consent.js",
-  "repository": "https://github.com/dmstr/cookie-consent.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmstr/cookie-consent.git"
+  },
   "author": "germanbisurgi <gebisurgi@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -30,5 +33,14 @@
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "@babel/runtime": "^7.7.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/dmstr/cookie-consent/issues"
+  },
+  "homepage": "https://github.com/dmstr/cookie-consent#readme",
+  "keywords": [
+    "GDPR",
+    "cookie",
+    "consent"
+  ]
 }
