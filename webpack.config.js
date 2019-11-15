@@ -13,24 +13,20 @@ module.exports = {
   // devtool: 'inline-source-map',
   module: {
     rules: [
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   loader: 'eslint-loader',
-      //   enforce: 'pre',
-      //   options: {
-      //     configFile: './.eslintrc.json',
-      //     cache: false
-      //   }
-      // },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'/*,
+        loader: 'eslint-loader',
+        enforce: 'pre',
         options: {
-          presets: ['@babel/preset-env'],
-          plugins: ['@babel/plugin-transform-runtime']
-        }*/
+          configFile: './.eslintrc.json',
+          cache: false
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       }
     ]
   },
