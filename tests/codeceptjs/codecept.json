@@ -1,0 +1,35 @@
+{
+  "tests": "./**/*_test.js",
+  "timeout": 10000,
+  "output": "./output",
+  "helpers": {
+    "WebDriver": {
+      "url": "http://node:9001/tests/pages/",
+      "browser": "firefox",
+      "host": "firefox",
+      "smartWait": 5000
+    }
+  },
+  "include": {
+    "I": "./steps_file.js"
+  },
+  "bootstrap": false,
+  "mocha": {},
+  "name": "codeceptjs",
+  "multiple": {
+    "parallel": {
+      "chunks": 2
+    },
+    "basic": {
+      "browsers": [
+        "firefox",
+        {
+          "url": "http://node:9001/tests/pages/",
+          "browser": "chrome",
+          "host": "chrome",
+          "restart": false
+        }
+      ]
+    }
+  }
+}
