@@ -6,7 +6,7 @@ const CookieConsent = function (options) {
     domain: '',
     expiryDays: 365
   }
-  this.options = Object.assign({}, this.defaultsOptions, options)
+  this.options = this.mergeObjects(this.defaultsOptions, options)
   this.inputs = [].slice.call(document.querySelectorAll('[data-cc-consent]'))
   this.popup = document.querySelector('.cookie-consent-popup')
   this.saveButtons = [].slice.call(document.querySelectorAll('.cookie-consent-save'))
@@ -113,14 +113,16 @@ CookieConsent.prototype.get = function () {
 
 CookieConsent.prototype.has = function (consent) {
   const value = this.get()
-  return (typeof value !== 'undefined' && value.includes(consent))
+  // return (typeof value !== 'undefined' && value.includes(consent))
+  return (typeof value !== 'undefined' && value.indexOf(consent) > -1)
 }
 
 CookieConsent.prototype.add = function (consent) {
   let value = this.get()
-  if (typeof value !== 'undefined' && !value.includes(consent)) {
+  // if (typeof value !== 'undefined' && !value.includes(consent)) {
+  if (typeof value !== 'undefined' && !value.indexOf(consent) > -1) {
     value.push(consent)
-    const options = Object.assign({}, this.defaultsOptions, { value: value })
+    const options = this.mergeObjects(this.defaultsOptions, { value: value })
     this.set(options)
     return true
   } else {
@@ -136,7 +138,7 @@ CookieConsent.prototype.remove = function (consent) {
   let index = value.indexOf(consent)
   if (index > -1) {
     value.splice(index, 1)
-    const options = Object.assign({}, this.defaultsOptions, { value: value })
+    const options = this.mergeObjects(this.defaultsOptions, { value: value })
     this.set(options)
     return true
   } else {
@@ -156,6 +158,18 @@ CookieConsent.prototype.clean = function (config) {
       }
     }
   }
+}
+
+CookieConsent.prototype.mergeObjects = function () {
+  var res = {}
+  for (var i = 0; i < arguments.length; i++) {
+    for (let x in arguments[i]) {
+      if (arguments[i].hasOwnProperty(x)) {
+        res[x] = arguments[i][x]
+      }
+    }
+  }
+  return res
 }
 
 CookieConsent.prototype.afterSave = function () {}

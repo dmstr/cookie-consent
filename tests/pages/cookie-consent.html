@@ -36,6 +36,7 @@
   <script src="../../dist/cookie-consent.js"></script>
   <script>
     var cc = new CookieConsent()
+    console.log('consent', cc.get())
     cc.afterSave = function (cc) {
       cc.clean({
         'statistics': {
