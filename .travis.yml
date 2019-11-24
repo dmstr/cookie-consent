@@ -10,7 +10,6 @@ services:
   - docker
 
 before_script:
-  - yarn
   - cd tests
   - docker-compose run --rm node yarn
   - docker-compose up -d $SELENIUM_BROWSER
