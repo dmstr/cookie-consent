@@ -35,7 +35,7 @@ CookieConsent.prototype.close = function () {
 CookieConsent.prototype.addEventListeners = function () {
   if (this.saveButtons.length > 0) {
     this.saveButtons.forEach((saveButton) => {
-      let samespace = saveButton.getAttribute('data-cc-namespace')
+      const samespace = saveButton.getAttribute('data-cc-namespace')
       saveButton.addEventListener('click', () => {
         this.save(samespace)
       })
@@ -61,9 +61,9 @@ CookieConsent.prototype.save = function (namespace) {
   this.set(this.options)
   if (this.inputs.length > 0) {
     this.inputs.forEach((input) => {
-      let inputNamespace = input.getAttribute('data-cc-namespace')
+      const inputNamespace = input.getAttribute('data-cc-namespace')
       if (inputNamespace === namespace) {
-        let consent = input.getAttribute('data-cc-consent')
+        const consent = input.getAttribute('data-cc-consent')
         if (input.checked) {
           this.add(consent)
         } else {
@@ -82,15 +82,15 @@ CookieConsent.prototype.refreshUI = function () {
     return
   }
   this.inputs.forEach((input) => {
-    let consent = input.getAttribute('data-cc-consent')
+    const consent = input.getAttribute('data-cc-consent')
     input.checked = this.has(consent)
   })
 }
 
 CookieConsent.prototype.set = function (options) {
-  let d = new Date()
+  const d = new Date()
   d.setDate(d.getDate() + (options.expiryDays || 365))
-  let cookie = [
+  const cookie = [
     options.name + '=' + JSON.stringify(options.value),
     'expires=' + d.toUTCString(),
     'path=' + (options.path || '/')
@@ -102,9 +102,9 @@ CookieConsent.prototype.set = function (options) {
 }
 
 CookieConsent.prototype.get = function () {
-  let string = '; ' + document.cookie
-  let parts = string.split('; ' + this.options.name + '=')
-  let value = parts.length !== 2 ? undefined : parts.pop().split(';').shift()
+  const string = '; ' + document.cookie
+  const parts = string.split('; ' + this.options.name + '=')
+  const value = parts.length !== 2 ? undefined : parts.pop().split(';').shift()
   if (typeof value !== 'undefined') {
     return JSON.parse(value)
   }
@@ -118,7 +118,7 @@ CookieConsent.prototype.has = function (consent) {
 }
 
 CookieConsent.prototype.add = function (consent) {
-  let value = this.get()
+  const value = this.get()
   // if (typeof value !== 'undefined' && !value.includes(consent)) {
   if (typeof value !== 'undefined' && !value.indexOf(consent) > -1) {
     value.push(consent)
@@ -131,11 +131,11 @@ CookieConsent.prototype.add = function (consent) {
 }
 
 CookieConsent.prototype.remove = function (consent) {
-  let value = this.get()
+  const value = this.get()
   if (typeof value === 'undefined') {
     return false
   }
-  let index = value.indexOf(consent)
+  const index = value.indexOf(consent)
   if (index > -1) {
     value.splice(index, 1)
     const options = this.mergeObjects(this.defaultsOptions, { value: value })
@@ -147,10 +147,10 @@ CookieConsent.prototype.remove = function (consent) {
 }
 
 CookieConsent.prototype.clean = function (config) {
-  for (let consent in config) {
+  for (const consent in config) {
     if (!this.has(consent)) {
-      let cookies = config[consent]['cookies']
-      for (let cookie in cookies) {
+      const cookies = config[consent].cookies
+      for (const cookie in cookies) {
         this.set({
           name: cookies[cookie],
           expiryDays: -1
@@ -163,8 +163,8 @@ CookieConsent.prototype.clean = function (config) {
 CookieConsent.prototype.mergeObjects = function () {
   var res = {}
   for (var i = 0; i < arguments.length; i++) {
-    for (let x in arguments[i]) {
-      if (arguments[i].hasOwnProperty(x)) {
+    for (const x in arguments[i]) {
+      if (Object.prototype.hasOwnProperty.call(arguments[i], x)) {
         res[x] = arguments[i][x]
       }
     }
