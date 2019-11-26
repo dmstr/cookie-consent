@@ -148,13 +148,24 @@ CookieConsent.prototype.remove = function (consent) {
 
 CookieConsent.prototype.clean = function (config) {
   for (const consent in config) {
-    if (!this.has(consent)) {
-      const cookies = config[consent].cookies
-      for (const cookie in cookies) {
-        this.set({
-          name: cookies[cookie],
-          expiryDays: -1
-        })
+    if (Object.prototype.hasOwnProperty.call(config, consent)) {
+      if (!this.has(consent)) {
+        const cookies = config[consent].cookies
+        for (const cookie in cookies) {
+          if (Object.prototype.hasOwnProperty.call(cookies, cookie)) {
+            const setConfig = {
+              name: cookies[cookie].name,
+              expiryDays: -1
+            }
+            if (typeof cookies[cookie].domain !== 'undefined') {
+              setConfig.domain = cookies[cookie].domain
+            }
+            if (typeof cookies[cookie].path !== 'undefined') {
+              setConfig.path = cookies[cookie].path
+            }
+            this.set(setConfig)
+          }
+        }
       }
     }
   }

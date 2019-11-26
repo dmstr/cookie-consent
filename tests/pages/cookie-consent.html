@@ -36,11 +36,14 @@
   <script src="../../dist/cookie-consent.js"></script>
   <script>
     var cc = new CookieConsent()
-    console.log('consent', cc.get())
     cc.afterSave = function (cc) {
       cc.clean({
         'statistics': {
-          'cookies': [ '_ga', '_gat', '_gid' ]
+          'cookies': [
+            {name: '_ga'},
+            {name: '_gat', domain: '', path: '/'},
+            {name: '_gid', domain: '', path: '/'}
+          ]
         }
       })
       window.location.reload()

@@ -156,11 +156,15 @@ just need to put the right classes in your html to get it working.
 ```javascript
 cc.afterSave = function (cc) {
     // clean google analytics cookies if we do not have the "statistics" consent by expiring them. Then reload the page
-    cc.clean({
-        'statistics': {
-          'cookies': [ '_ga', '_gat', '_gid' ]
-        }
-    })
+  cc.clean({
+    'statistics': {
+      'cookies': [
+        {name: '_ga'},
+        {name: '_gat', domain: '', path: '/'},
+        {name: '_gid', domain: '', path: '/'}
+      ]
+    }
+  })
   window.location.reload()
 }
 ```
