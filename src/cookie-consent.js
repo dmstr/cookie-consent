@@ -9,7 +9,12 @@ const CookieConsent = function (options) {
   this.options = this.mergeObjects(this.defaultsOptions, options)
   this.inputs = [].slice.call(document.querySelectorAll('[data-cc-consent]'))
   this.popup = document.querySelector('.cookie-consent-popup')
+  this.controls = document.querySelector('.cookie-consent-controls')
   this.saveButtons = [].slice.call(document.querySelectorAll('.cookie-consent-save'))
+  this.acceptAllButtons = [].slice.call(document.querySelectorAll('.cookie-consent-accept-all'))
+  this.denyAllButtons = [].slice.call(document.querySelectorAll('.cookie-consent-deny-all'))
+  this.openControlsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-controls-open'))
+  this.closeControlsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-controls-close'))
   this.openButtons = [].slice.call(document.querySelectorAll('.cookie-consent-open'))
   this.closeButtons = [].slice.call(document.querySelectorAll('.cookie-consent-close'))
 
@@ -32,12 +37,62 @@ CookieConsent.prototype.close = function () {
   }
 }
 
+CookieConsent.prototype.openControls = function () {
+  if (this.controls) {
+    this.controls.classList.add('open')
+  }
+}
+
+CookieConsent.prototype.closeControls = function () {
+  if (this.controls) {
+    this.controls.classList.remove('open')
+  }
+}
+
 CookieConsent.prototype.addEventListeners = function () {
+  if (this.openControlsButtons.length > 0) {
+    this.openControlsButtons.forEach((openControlsButton) => {
+      openControlsButton.addEventListener('click', () => {
+        this.open()
+        this.openControls()
+      })
+    })
+  }
+  if (this.closeControlsButtons.length > 0) {
+    this.closeControlsButtons.forEach((closeControlsButton) => {
+      closeControlsButton.addEventListener('click', () => {
+        this.closeControls()
+      })
+    })
+  }
   if (this.saveButtons.length > 0) {
     this.saveButtons.forEach((saveButton) => {
-      const samespace = saveButton.getAttribute('data-cc-namespace')
       saveButton.addEventListener('click', () => {
-        this.save(samespace)
+        this.save()
+      })
+    })
+  }
+  if (this.acceptAllButtons.length > 0) {
+    this.acceptAllButtons.forEach((acceptAll) => {
+      acceptAll.addEventListener('click', () => {
+        if (this.inputs.length > 0) {
+          this.inputs.forEach((input) => {
+            input.checked = true
+          })
+        }
+        this.save()
+      })
+    })
+  }
+  if (this.denyAllButtons.length > 0) {
+    this.denyAllButtons.forEach((denyAll) => {
+      denyAll.addEventListener('click', () => {
+        if (this.inputs.length > 0) {
+          this.inputs.forEach((input) => {
+            input.checked = false
+          })
+        }
+        this.save()
       })
     })
   }
@@ -57,18 +112,15 @@ CookieConsent.prototype.addEventListeners = function () {
   }
 }
 
-CookieConsent.prototype.save = function (namespace) {
+CookieConsent.prototype.save = function () {
   this.set(this.options)
   if (this.inputs.length > 0) {
     this.inputs.forEach((input) => {
-      const inputNamespace = input.getAttribute('data-cc-namespace')
-      if (inputNamespace === namespace) {
-        const consent = input.getAttribute('data-cc-consent')
-        if (input.checked) {
-          this.add(consent)
-        } else {
-          this.remove(consent)
-        }
+      const consent = input.getAttribute('data-cc-consent')
+      if (input.checked) {
+        this.add(consent)
+      } else {
+        this.remove(consent)
       }
     })
   }
@@ -172,8 +224,8 @@ CookieConsent.prototype.clean = function (config) {
 }
 
 CookieConsent.prototype.mergeObjects = function () {
-  var res = {}
-  for (var i = 0; i < arguments.length; i++) {
+  const res = {}
+  for (let i = 0; i < arguments.length; i++) {
     for (const x in arguments[i]) {
       if (Object.prototype.hasOwnProperty.call(arguments[i], x)) {
         res[x] = arguments[i][x]

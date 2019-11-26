@@ -31,19 +31,29 @@ var cc = new CookieConsent({
 ### HTML
 
 ```html
+<!-- popup toggle buttons (for convenience) -->
+<button class="cookie-consent-open">open</button>
+<button class="cookie-consent-close">close</button>
+<button class="cookie-consent-controls-open">Open controls</button>
+<button class="cookie-consent-controls-close">Close controls</button>
+
 <!-- the popup that will appear if no consent cookie where saved -->
 <div class="cookie-consent-popup">
   <div>
     <span class="cookie-consent-message">We are using cookies</span>
     <a class="cookie-consent-link" href="#">Learn more</a>
+    <button class="cookie-consent-accept-all">Accept All</button>
+    <button class="cookie-consent-deny-all">Deny All</button>
+    <button class="cookie-consent-controls-open">Open controls</button>
+    <button class="cookie-consent-controls-close">Close controls</button>
   </div>
-  <div>
-    <label><input type="checkbox" data-cc-namespace="popup" data-cc-consent="statistics">Statistics</label>
-    <label><input type="checkbox" data-cc-namespace="popup" data-cc-consent="marketing">Marketing</label>
-    <label><input type="checkbox" data-cc-namespace="popup" data-cc-consent="external-media">External Media</label>
-    <button class="cookie-consent-save" data-cc-namespace="popup">SAVE</button>
+  <div class="cookie-consent-controls open">
+    <label><input type="checkbox" data-cc-consent="statistics">Statistics</label>
+    <label><input type="checkbox" data-cc-consent="extern-media">Extern Media</label>
+    <button class="cookie-consent-save">SAVE</button>
   </div>
 </div>
+
 
 <script src="../../dist/cookie-consent.js"></script>
 <script>
@@ -53,19 +63,12 @@ var cc = new CookieConsent()
 
 ### CSS
 
-```html
-<link rel="stylesheet" href="cookie-consent.css">
-```
-
-and your cookie-consent.css
-
 ```css
 .cookie-consent-popup {
     animation-name: show;
     animation-duration: 1s;
     animation-timing-function: ease;
     display: none;
-    padding: 15px;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -81,6 +84,18 @@ and your cookie-consent.css
     animation-timing-function: ease;
 }
 
+.cookie-consent-controls {
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height 0.5s ease-out;
+    -moz-transition: max-height 0.5s ease-out;
+    transition: max-height 0.5s ease-out;
+}
+
+.cookie-consent-controls.open {
+    max-height: 600px;
+}
+
 @keyframes show {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -90,14 +105,6 @@ and your cookie-consent.css
     from {opacity: 1;}
     to {opacity: 0;}
 }
-```
-
-## Open and Close buttons
-
-```html
-<!-- popup toggle buttons (for convenience) -->
-<button class="cookie-consent-open">open</button>
-<button class="cookie-consent-close">close</button>
 ```
 
 ## OPTIONS
@@ -145,9 +152,13 @@ This Cookie Consent library works in a declarative approach. That mean that you
 just need to put the right classes in your html to get it working.
 
 * `cookie-consent-popup`: The popup widget. It will take the class "open" when no consent cookie was saved or when its manually triggered.
+* `cookie-consent-controls`: container for the consent checkboxes (controls).
 * `cookie-consent-save`: save the data-cc-consent values of the checkboxes in its same namespace in the consent cookie.
+* `cookie-consent-accept-all`: check all consents controls and save.
+* `cookie-consent-deny-all`: uncheck all consents controls and save.
 * `cookie-consent-open`: opens the popup.
 * `cookie-consent-close`: closes the popup.
+* `cookie-consent-controls-toggle`: Toggles the cookie-consent-controls "open" class.
 * `data-cc-consent`: the consent name/value that will be stored in the consent cookie.
 * `data-cc-namespace`: used to group checkboxes and save buttons. In that way you can add different groups in different zones of your website without conflicting with other checkboxes or save buttons.
 

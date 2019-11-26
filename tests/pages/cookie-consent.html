@@ -12,24 +12,23 @@
 <!-- popup toggle buttons (for convenience) -->
 <button class="cookie-consent-open">open</button>
 <button class="cookie-consent-close">close</button>
-
-<!-- somewhere else in you page where you allow the user to change his consents -->
-<label><input type="checkbox" data-cc-namespace="body" data-cc-consent="statistics">Statistics</label>
-<label><input type="checkbox" data-cc-namespace="body" data-cc-consent="marketing">Marketing</label>
-<label><input type="checkbox" data-cc-namespace="body" data-cc-consent="extern-media">Extern Media</label>
-<button class="cookie-consent-save" data-cc-namespace="body">SAVE</button>
+<button class="cookie-consent-controls-open">Open controls</button>
+<button class="cookie-consent-controls-close">Close controls</button>
 
 <!-- the popup that will appear if no consent cookie where saved -->
 <div class="cookie-consent-popup">
   <div>
     <span class="cookie-consent-message">We are using cookies</span>
     <a class="cookie-consent-link" href="#">Learn more</a>
+    <button class="cookie-consent-accept-all">Accept All</button>
+    <button class="cookie-consent-deny-all">Deny All</button>
+    <button class="cookie-consent-controls-open">Open controls</button>
+    <button class="cookie-consent-controls-close">Close controls</button>
   </div>
-  <div>
-    <label><input type="checkbox" data-cc-namespace="popup" data-cc-consent="statistics">Statistics</label>
-    <label><input type="checkbox" data-cc-namespace="popup" data-cc-consent="marketing">Marketing</label>
-    <label><input type="checkbox" data-cc-namespace="popup" data-cc-consent="extern-media">Extern Media</label>
-    <button class="cookie-consent-save" data-cc-namespace="popup">SAVE</button>
+  <div class="cookie-consent-controls open">
+    <label><input type="checkbox" data-cc-consent="statistics">Statistics</label>
+    <label><input type="checkbox" data-cc-consent="extern-media">Extern Media</label>
+    <button class="cookie-consent-save">SAVE</button>
   </div>
 </div>
 
