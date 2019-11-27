@@ -2,6 +2,9 @@ sudo: required
 
 language: generic
 
+addons:
+  artifacts: true
+
 env:
   - SELENIUM_BROWSER=chrome
   - SELENIUM_BROWSER=firefox
