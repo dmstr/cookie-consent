@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/germanbisurgi/cookie-consent.svg?branch=master)](https://travis-ci.org/germanbisurgi/cookie-consent)
+[![Build Status](https://travis-ci.org/dmstr/cookie-consent.svg?branch=master)](https://travis-ci.org/dmstr/cookie-consent)
 
 # COOKIE CONSENT
 It allows the user to choose through his active consent if the page can or not
