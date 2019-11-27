@@ -3,7 +3,10 @@ sudo: required
 language: generic
 
 addons:
-  artifacts: true
+  artifacts:
+    s3_region: eu-west-1
+    paths:
+      - tests/codeceptjs/output
 
 env:
   - SELENIUM_BROWSER=chrome
