@@ -63,6 +63,12 @@ Scenario('should work correctly', async function (I) {
   I.waitForInvisible('[data-cc-consent="statistics"]', 5);
   I.waitForInvisible('[data-cc-consent="extern-media"]', 5);
   I.waitForInvisible('.cookie-consent-save', 5);
+  I.click('.cookie-consent-details-open')
+  I.waitForVisible('.cookie-consent-popup', 5);
+  I.waitForVisible('.cookie-consent-details', 5);
+  I.click('.cookie-consent-details-close')
+  I.waitForVisible('.cookie-consent-popup', 5);
+  I.waitForInvisible('.cookie-consent-details', 5);
   I.click('.cookie-consent-accept-all')
   I.seeCookie('cookie_consent_status')
   I.seeCookie('_ga')
