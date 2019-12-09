@@ -54,6 +54,23 @@ var cc = new CookieConsent({
     <label><input type="checkbox" data-cc-consent="extern-media">Extern Media</label>
     <button class="cookie-consent-save">SAVE</button>
   </div>
+  <div class="cookie-consent-details open">
+    <h2>Statistics</h2>
+    <table style="width:100%">
+      <tr>
+        <td>Name</td>
+        <td>Statistics</td>
+      </tr>
+      <tr>
+        <td>Goal</td>
+        <td>Create statistics data</td>
+      </tr>
+      <tr>
+        <td>Cookie Names</td>
+        <td>_ga, _gat, _gid, _gali</td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 
