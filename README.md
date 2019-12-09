@@ -36,6 +36,8 @@ var cc = new CookieConsent({
 <button class="cookie-consent-close">close</button>
 <button class="cookie-consent-controls-open">Open controls</button>
 <button class="cookie-consent-controls-close">Close controls</button>
+<button class="cookie-consent-details-open">Open Details</button>
+<button class="cookie-consent-details-close">Close Details</button>
 
 <!-- the popup that will appear if no consent cookie where saved -->
 <div class="cookie-consent-popup">
@@ -96,6 +98,18 @@ var cc = new CookieConsent()
     max-height: 600px;
 }
 
+.cookie-consent-details {
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height 0.5s ease-out;
+    -moz-transition: max-height 0.5s ease-out;
+    transition: max-height 0.5s ease-out;
+}
+
+.cookie-consent-details.open {
+    max-height: 600px;
+}
+
 @keyframes show {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -105,6 +119,8 @@ var cc = new CookieConsent()
     from {opacity: 1;}
     to {opacity: 0;}
 }
+
+
 ```
 
 ## OPTIONS
@@ -158,7 +174,10 @@ just need to put the right classes in your html to get it working.
 * `cookie-consent-deny-all`: uncheck all consents controls and save.
 * `cookie-consent-open`: opens the popup.
 * `cookie-consent-close`: closes the popup.
-* `cookie-consent-controls-toggle`: Toggles the cookie-consent-controls "open" class.
+* `cookie-consent-controls-open`: opens the controls
+* `cookie-consent-controls-close`: closes the controls
+* `cookie-consent-details-open`: opens the details
+* `cookie-consent-details-close`: closes the details
 * `data-cc-consent`: the consent name/value that will be stored in the consent cookie.
 * `data-cc-namespace`: used to group checkboxes and save buttons. In that way you can add different groups in different zones of your website without conflicting with other checkboxes or save buttons.
 
