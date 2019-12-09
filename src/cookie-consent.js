@@ -10,11 +10,14 @@ const CookieConsent = function (options) {
   this.inputs = [].slice.call(document.querySelectorAll('[data-cc-consent]'))
   this.popup = document.querySelector('.cookie-consent-popup')
   this.controls = document.querySelector('.cookie-consent-controls')
+  this.details = document.querySelector('.cookie-consent-details')
   this.saveButtons = [].slice.call(document.querySelectorAll('.cookie-consent-save'))
   this.acceptAllButtons = [].slice.call(document.querySelectorAll('.cookie-consent-accept-all'))
   this.denyAllButtons = [].slice.call(document.querySelectorAll('.cookie-consent-deny-all'))
   this.openControlsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-controls-open'))
   this.closeControlsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-controls-close'))
+  this.openDetailsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-details-open'))
+  this.closeDetailsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-details-close'))
   this.openButtons = [].slice.call(document.querySelectorAll('.cookie-consent-open'))
   this.closeButtons = [].slice.call(document.querySelectorAll('.cookie-consent-close'))
 
@@ -49,7 +52,34 @@ CookieConsent.prototype.closeControls = function () {
   }
 }
 
+CookieConsent.prototype.openDetails = function () {
+  if (this.details) {
+    this.details.classList.add('open')
+  }
+}
+
+CookieConsent.prototype.closeDetails = function () {
+  if (this.details) {
+    this.details.classList.remove('open')
+  }
+}
+
 CookieConsent.prototype.addEventListeners = function () {
+  if (this.openDetailsButtons.length > 0) {
+    this.openDetailsButtons.forEach((openDetailsButton) => {
+      openDetailsButton.addEventListener('click', () => {
+        this.open()
+        this.openDetails()
+      })
+    })
+  }
+  if (this.closeDetailsButtons.length > 0) {
+    this.closeDetailsButtons.forEach((closeDetailsButton) => {
+      closeDetailsButton.addEventListener('click', () => {
+        this.closeDetails()
+      })
+    })
+  }
   if (this.openControlsButtons.length > 0) {
     this.openControlsButtons.forEach((openControlsButton) => {
       openControlsButton.addEventListener('click', () => {
