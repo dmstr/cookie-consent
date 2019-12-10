@@ -34,10 +34,13 @@ var cc = new CookieConsent({
 <!-- popup toggle buttons (for convenience) -->
 <button class="cookie-consent-open">open</button>
 <button class="cookie-consent-close">close</button>
+<button class="cookie-consent-toggle">toggle</button>
 <button class="cookie-consent-controls-open">Open controls</button>
 <button class="cookie-consent-controls-close">Close controls</button>
+<button class="cookie-consent-controls-toggle">Toggle controls</button>
 <button class="cookie-consent-details-open">Open Details</button>
 <button class="cookie-consent-details-close">Close Details</button>
+<button class="cookie-consent-details-toggle">Toggle details</button>
 
 <!-- the popup that will appear if no consent cookie where saved -->
 <div class="cookie-consent-popup">
@@ -191,10 +194,13 @@ just need to put the right classes in your html to get it working.
 * `cookie-consent-deny-all`: uncheck all consents controls and save.
 * `cookie-consent-open`: opens the popup.
 * `cookie-consent-close`: closes the popup.
+* `cookie-consent-toggle`: toggles the popup.
 * `cookie-consent-controls-open`: opens the controls
 * `cookie-consent-controls-close`: closes the controls
+* `cookie-consent-controls-toggle`: toggles the controls
 * `cookie-consent-details-open`: opens the details
 * `cookie-consent-details-close`: closes the details
+* `cookie-consent-details-toggle`: toggles the details
 * `data-cc-consent`: the consent name/value that will be stored in the consent cookie.
 * `data-cc-namespace`: used to group checkboxes and save buttons. In that way you can add different groups in different zones of your website without conflicting with other checkboxes or save buttons.
 

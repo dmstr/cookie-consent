@@ -16,10 +16,13 @@ const CookieConsent = function (options) {
   this.denyAllButtons = [].slice.call(document.querySelectorAll('.cookie-consent-deny-all'))
   this.openControlsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-controls-open'))
   this.closeControlsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-controls-close'))
+  this.toggleControlsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-controls-toggle'))
   this.openDetailsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-details-open'))
   this.closeDetailsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-details-close'))
+  this.toggleDetailsButtons = [].slice.call(document.querySelectorAll('.cookie-consent-details-toggle'))
   this.openButtons = [].slice.call(document.querySelectorAll('.cookie-consent-open'))
   this.closeButtons = [].slice.call(document.querySelectorAll('.cookie-consent-close'))
+  this.toggleButtons = [].slice.call(document.querySelectorAll('.cookie-consent-toggle'))
 
   this.addEventListeners()
   if (typeof this.get() === 'undefined') {
@@ -65,6 +68,17 @@ CookieConsent.prototype.closeDetails = function () {
 }
 
 CookieConsent.prototype.addEventListeners = function () {
+  if (this.toggleButtons.length > 0) {
+    this.toggleButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (this.popup.classList.contains('open')) {
+          this.close()
+        } else {
+          this.open()
+        }
+      })
+    })
+  }
   if (this.openDetailsButtons.length > 0) {
     this.openDetailsButtons.forEach((openDetailsButton) => {
       openDetailsButton.addEventListener('click', () => {
@@ -80,6 +94,18 @@ CookieConsent.prototype.addEventListeners = function () {
       })
     })
   }
+  if (this.toggleDetailsButtons.length > 0) {
+    this.toggleDetailsButtons.forEach((toggleDetailsButton) => {
+      toggleDetailsButton.addEventListener('click', () => {
+        if (this.details.classList.contains('open')) {
+          this.closeDetails()
+        } else {
+          this.open()
+          this.openDetails()
+        }
+      })
+    })
+  }
   if (this.openControlsButtons.length > 0) {
     this.openControlsButtons.forEach((openControlsButton) => {
       openControlsButton.addEventListener('click', () => {
@@ -92,6 +118,18 @@ CookieConsent.prototype.addEventListeners = function () {
     this.closeControlsButtons.forEach((closeControlsButton) => {
       closeControlsButton.addEventListener('click', () => {
         this.closeControls()
+      })
+    })
+  }
+  if (this.toggleControlsButtons.length > 0) {
+    this.toggleControlsButtons.forEach((toggleControlsButton) => {
+      toggleControlsButton.addEventListener('click', () => {
+        if (this.controls.classList.contains('open')) {
+          this.closeControls()
+        } else {
+          this.open()
+          this.openControls()
+        }
       })
     })
   }
@@ -195,13 +233,11 @@ CookieConsent.prototype.get = function () {
 
 CookieConsent.prototype.has = function (consent) {
   const value = this.get()
-  // return (typeof value !== 'undefined' && value.includes(consent))
   return (typeof value !== 'undefined' && value.indexOf(consent) > -1)
 }
 
 CookieConsent.prototype.add = function (consent) {
   const value = this.get()
-  // if (typeof value !== 'undefined' && !value.includes(consent)) {
   if (typeof value !== 'undefined' && !value.indexOf(consent) > -1) {
     value.push(consent)
     const options = this.mergeObjects(this.defaultsOptions, { value: value })
