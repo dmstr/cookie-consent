@@ -1,6 +1,7 @@
 /* global Feature Scenario */
 
-var assert = require('assert')
+const assert = require('assert')
+const waitTime = 10
 
 Feature('Cookie Consent')
 
@@ -11,10 +12,10 @@ Scenario('should work correctly', async function (I) {
   I.dontSeeCookie('_ga')
   I.dontSeeCookie('_gat')
   I.dontSeeCookie('_gid')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForVisible('[data-cc-consent="statistics"]', 5);
-  I.waitForVisible('[data-cc-consent="extern-media"]', 5);
-  I.waitForVisible('.cookie-consent-save', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForVisible('[data-cc-consent="statistics"]', waitTime)
+  I.waitForVisible('[data-cc-consent="extern-media"]', waitTime)
+  I.waitForVisible('.cookie-consent-save', waitTime)
   I.dontSeeCheckboxIsChecked('[data-cc-consent="statistics"]')
   I.dontSeeCheckboxIsChecked('[data-cc-consent="extern-media"]')
 
@@ -31,10 +32,10 @@ Scenario('should work correctly', async function (I) {
 
   // dissallow some consents
   I.click('.cookie-consent-open')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForVisible('[data-cc-consent="statistics"]', 5);
-  I.waitForVisible('[data-cc-consent="extern-media"]', 5);
-  I.waitForVisible('.cookie-consent-save', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForVisible('[data-cc-consent="statistics"]', waitTime)
+  I.waitForVisible('[data-cc-consent="extern-media"]', waitTime)
+  I.waitForVisible('.cookie-consent-save', waitTime)
   I.seeCheckboxIsChecked('[data-cc-consent="statistics"]')
   I.seeCheckboxIsChecked('[data-cc-consent="extern-media"]')
   I.uncheckOption('[data-cc-consent="statistics"]')
@@ -47,65 +48,65 @@ Scenario('should work correctly', async function (I) {
   cookie = await I.grabCookie('cookie_consent_status')
   assert.deepStrictEqual(cookie.value, '[]')
   I.click('.cookie-consent-open')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForVisible('[data-cc-consent="statistics"]', 5);
-  I.waitForVisible('[data-cc-consent="extern-media"]', 5);
-  I.waitForVisible('.cookie-consent-save', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForVisible('[data-cc-consent="statistics"]', waitTime)
+  I.waitForVisible('[data-cc-consent="extern-media"]', waitTime)
+  I.waitForVisible('.cookie-consent-save', waitTime)
   I.dontSeeCheckboxIsChecked('[data-cc-consent="statistics"]')
   I.dontSeeCheckboxIsChecked('[data-cc-consent="extern-media"]')
 
   // open and close buttons
   I.click('.cookie-consent-close')
-  I.waitForInvisible('.cookie-consent-popup', 5);
-  I.waitForInvisible('[data-cc-consent="statistics"]', 5);
-  I.waitForInvisible('[data-cc-consent="extern-media"]', 5);
-  I.waitForInvisible('.cookie-consent-save', 5);
+  I.waitForInvisible('.cookie-consent-popup', waitTime)
+  I.waitForInvisible('[data-cc-consent="statistics"]', waitTime)
+  I.waitForInvisible('[data-cc-consent="extern-media"]', waitTime)
+  I.waitForInvisible('.cookie-consent-save', waitTime)
   I.click('.cookie-consent-controls-open')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForVisible('[data-cc-consent="statistics"]', 5);
-  I.waitForVisible('[data-cc-consent="extern-media"]', 5);
-  I.waitForVisible('.cookie-consent-save', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForVisible('[data-cc-consent="statistics"]', waitTime)
+  I.waitForVisible('[data-cc-consent="extern-media"]', waitTime)
+  I.waitForVisible('.cookie-consent-save', waitTime)
   I.click('.cookie-consent-controls-close')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForInvisible('[data-cc-consent="statistics"]', 5);
-  I.waitForInvisible('[data-cc-consent="extern-media"]', 5);
-  I.waitForInvisible('.cookie-consent-save', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForInvisible('[data-cc-consent="statistics"]', waitTime)
+  I.waitForInvisible('[data-cc-consent="extern-media"]', waitTime)
+  I.waitForInvisible('.cookie-consent-save', waitTime)
   I.click('.cookie-consent-details-open')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForVisible('.cookie-consent-details', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForVisible('.cookie-consent-details', waitTime)
   I.click('.cookie-consent-details-close')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForInvisible('.cookie-consent-details', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForInvisible('.cookie-consent-details', waitTime)
 
   // toggle buttons
   I.click('.cookie-consent-close')
   I.click('.cookie-consent-controls-close')
   I.click('.cookie-consent-details-close')
-  I.waitForInvisible('.cookie-consent-popup', 5);
-  I.waitForInvisible('.cookie-consent-controls', 5);
-  I.waitForInvisible('.cookie-consent-details', 5);
+  I.waitForInvisible('.cookie-consent-popup', waitTime)
+  I.waitForInvisible('.cookie-consent-controls', waitTime)
+  I.waitForInvisible('.cookie-consent-details', waitTime)
   I.click('.cookie-consent-toggle')
-  I.waitForVisible('.cookie-consent-popup', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
   I.click('.cookie-consent-toggle')
-  I.waitForInvisible('.cookie-consent-popup', 5);
+  I.waitForInvisible('.cookie-consent-popup', waitTime)
 
   // control toggle buttons
   I.click('.cookie-consent-close')
   I.click('.cookie-consent-controls-toggle')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForVisible('.cookie-consent-controls', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForVisible('.cookie-consent-controls', waitTime)
   I.click('.cookie-consent-controls-toggle')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForInvisible('.cookie-consent-controls', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForInvisible('.cookie-consent-controls', waitTime)
 
   // details toggle buttons
   I.click('.cookie-consent-close')
   I.click('.cookie-consent-details-toggle')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForVisible('.cookie-consent-details', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForVisible('.cookie-consent-details', waitTime)
   I.click('.cookie-consent-details-toggle')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForInvisible('.cookie-consent-details', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForInvisible('.cookie-consent-details', waitTime)
 
   // accept all
   I.click('.cookie-consent-accept-all')
@@ -116,10 +117,10 @@ Scenario('should work correctly', async function (I) {
   cookie = await I.grabCookie('cookie_consent_status')
   assert.deepStrictEqual(cookie.value, '["statistics","extern-media"]')
   I.click('.cookie-consent-open')
-  I.waitForVisible('.cookie-consent-popup', 5);
-  I.waitForVisible('[data-cc-consent="statistics"]', 5);
-  I.waitForVisible('[data-cc-consent="extern-media"]', 5);
-  I.waitForVisible('.cookie-consent-save', 5);
+  I.waitForVisible('.cookie-consent-popup', waitTime)
+  I.waitForVisible('[data-cc-consent="statistics"]', waitTime)
+  I.waitForVisible('[data-cc-consent="extern-media"]', waitTime)
+  I.waitForVisible('.cookie-consent-save', waitTime)
 
   // deny all
   I.click('.cookie-consent-deny-all')
