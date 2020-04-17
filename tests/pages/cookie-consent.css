@@ -1,31 +1,23 @@
 .cookie-consent-popup {
     display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999999;
 }
 
 .cookie-consent-popup.open {
     display: block;
-    opacity: 1;
 }
 
 .cookie-consent-controls {
-    max-height: 0;
-    overflow: hidden;
+    display: none
 }
 
 .cookie-consent-controls.open {
-    max-height: 600px;
+    display: block;
 }
 
 .cookie-consent-details {
-    max-height: 0;
-    overflow: hidden;
+    display: none
 }
 
 .cookie-consent-details.open {
-    max-height: 600px;
+    display: block;
 }
