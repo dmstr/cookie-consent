@@ -17,8 +17,9 @@ services:
 
 before_script:
   - cd tests
-  - docker-compose run --rm node yarn
-  - docker-compose up -d $SELENIUM_BROWSER
+  - docker-compose up -d node $SELENIUM_BROWSER
+  - docker-compose run --rm node yarn install
+  - docker-compose run --rm node yarn build
   - docker-compose ps
 
 script:
