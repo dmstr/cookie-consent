@@ -19,7 +19,7 @@ before_script:
   - cd tests
   - docker-compose up -d node $SELENIUM_BROWSER
   - docker-compose run --rm node yarn install
-  - docker-compose run --rm yarn build
+  - docker-compose run --rm node yarn build
   - docker-compose ps
 
 script:
