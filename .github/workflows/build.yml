@@ -1,0 +1,17 @@
+name: Build and Test
+
+on: [push, pull_request]
+
+jobs:
+
+  e2e-test:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Node version
+        run: node -v
+      - name: Install
+        run: npm install
+      - name: Test
+        run: npm run test
