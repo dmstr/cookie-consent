@@ -240,7 +240,7 @@ CookieConsent.prototype.add = function (consent) {
   const value = this.get()
   if (typeof value !== 'undefined' && !value.indexOf(consent) > -1) {
     value.push(consent)
-    const options = this.mergeObjects(this.defaultsOptions, { value: value })
+    const options = this.mergeObjects(this.options, { value: value })
     this.set(options)
     return true
   } else {
@@ -256,7 +256,7 @@ CookieConsent.prototype.remove = function (consent) {
   const index = value.indexOf(consent)
   if (index > -1) {
     value.splice(index, 1)
-    const options = this.mergeObjects(this.defaultsOptions, { value: value })
+    const options = this.mergeObjects(this.options, { value: value })
     this.set(options)
     return true
   } else {
