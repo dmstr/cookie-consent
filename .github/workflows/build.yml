@@ -12,6 +12,6 @@ jobs:
       - name: Node version
         run: node -v
       - name: Install
-        run: npm install
+        run: yarn install
       - name: Test
-        run: npm run test
+        run: yarn test
